@@ -17,7 +17,7 @@
 ---
 
 ## 🌐 Connect with Me
-- [LinkedIn](www.linkedin.com/in/rehantambala/)
+- [LinkedIn](https://www.linkedin.com/in/rehantambala/)
 - [GitHub](https://github.com/rehantambala)
 
 ---
