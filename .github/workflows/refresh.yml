@@ -1,0 +1,41 @@
+name: Refresh profile record
+
+# Runs daily at 03:17 UTC (08:47 IST), whenever the generator changes, and on demand.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/**", "fonts/**", ".github/workflows/refresh.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install fonttools brotli
+      - run: python3 scripts/build.py --fetch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit refreshed graphics
+        run: |
+          git config user.name  "profile-refresh[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets data
+          if git diff --cached --quiet; then
+            echo "No change in the record."
+          else
+            git commit -m "Refresh record for $(date -u +%Y-%m-%d)"
+            git push
+          fi
