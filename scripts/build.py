@@ -301,13 +301,12 @@ def record(data):
     if len(hist) > 1:  # rating line, scaled to its own range
         lo, hi = min(hist), max(hist)
         span = max(hi - lo, 1)
-        x0, x1, y0, y1 = 300, 470, 340, 200
+        x0, x1, y0, y1 = 350, 520, 350, 190
         pts = " ".join(f"{x0 + i * (x1 - x0) / (len(hist) - 1):.1f},{y0 - (v - lo) / span * (y0 - y1):.1f}"
                        for i, v in enumerate(hist))
         p.raw(f'<polyline points="{pts}" fill="none" stroke="{INK}" stroke-width="2"/>')
         last = pts.split()[-1].split(",")
         p.raw(f'<rect x="{float(last[0]) - 4}" y="{float(last[1]) - 4}" width="8" height="8" fill="{ACID}"/>')
-        label(p, x0, y0 + 28, f"{len(hist)} rated contests")
     for i, (k, v) in enumerate([("Maximum", cf.get("max_rating")), ("Contests", cf.get("contests")),
                                 ("Solved", cf.get("solved"))]):
         x = 48 + i * 150
