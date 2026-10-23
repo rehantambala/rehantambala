@@ -21,10 +21,10 @@
       "message": "Import exact figures from the Smart Interviews leaderboard; count rating only from the third contest"
     }
   ],
-  "refreshed": "2026-10-22",
+  "refreshed": "2026-10-23",
   "codeforces": {
-    "rating": 835,
-    "max_rating": 835,
+    "rating": 844,
+    "max_rating": 844,
     "rank": "newbie",
     "contests": 5,
     "solved": 10,
@@ -33,7 +33,7 @@
       620,
       757,
       820,
-      835
+      844
     ]
   },
   "days": {
